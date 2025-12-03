@@ -1,0 +1,43 @@
+
+# ==========================================
+# application.yaml (公共配置，无密码，可上传)
+# ==========================================
+server:
+  port: 8081
+
+spring:
+  application:
+    name: hmdp
+  profiles:
+    active: dev # 激活 dev 环境，去加载下面的变量值
+
+  # 【这里只引用变量，不写具体值】
+  datasource:
+    driver-class-name: ${hmdp.datasource.driver-class-name}
+    # URL 里的 IP 和端口也用变量
+    url: jdbc:mysql://${hmdp.datasource.host}:${hmdp.datasource.port}/${hmdp.datasource.database}?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: ${hmdp.datasource.username}
+    password: ${hmdp.datasource.password}
+
+  # 【Redis 也一样，只引用变量】
+  redis:
+    host: ${hmdp.redis.host}
+    port: ${hmdp.redis.port}
+    password: ${hmdp.redis.password}
+    database: 0
+    lettuce:
+      pool:
+        max-active: 10
+        max-idle: 10
+        min-idle: 1
+        time-between-eviction-runs: 10s
+
+  jackson:
+    default-property-inclusion: non_null
+
+mybatis-plus:
+  type-aliases-package: com.hmdp.entity
+
+logging:
+  level:
+    com.hmdp: debug
