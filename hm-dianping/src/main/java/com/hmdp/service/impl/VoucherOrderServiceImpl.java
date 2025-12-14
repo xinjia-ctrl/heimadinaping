@@ -248,7 +248,8 @@ public class VoucherOrderServiceImpl extends ServiceImpl<VoucherOrderMapper, Vou
     @Transactional
     //一人一单
     public void createVoucherOrder(VoucherOrder voucherOrder) {
-        Long userId = UserHolder.getUser().getId();
+//        Long userId = UserHolder.getUser().getId();
+        Long userId = voucherOrder.getUserId();
 
             int count = query().eq("user_id", userId).eq("voucher_id", voucherOrder).count();
             if (count > 0) {

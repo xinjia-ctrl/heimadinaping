@@ -14,5 +14,5 @@
  redis.call('incrby',stockKey, -1)
  redis.call('sadd',orderKey, userId)
 
- redis.call('xadd', 'streams.orders', '*', 'userId', userId, 'voucherId', voucherId, 'id', orderId)
+ redis.call('xadd', 'stream.orders', '*', 'userId', userId, 'voucherId', voucherId, 'id', orderId)
  return 0
